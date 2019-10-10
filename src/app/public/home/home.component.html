@@ -1,0 +1,70 @@
+
+
+<div class="container home">
+  <div class="row">
+    <div class="col">
+      <div fxLayout="column"
+           fxLayout.gt-md="column"
+           fxLayoutGap.gt-md="20px"
+           fxLayoutAlign="center center">
+        <section class="home-page-title">
+          <h5 class="display-4"><span style="border-top: 1px solid #28a745; border-bottom: 1px solid #28a745;">HappyMarcel</span></h5>
+
+        </section>
+
+        <section>
+          <p class="lead text-center">
+            You found yourself in a place where you can easily and quickly share photos and videos with your family and friends. Platform was build with soul purpose of sharing your memories with people you care.
+            We do like keep things plain and simple, so with this in mind we designed this platform.<br/>
+            Just upload images and videos you wish to privately share with your group of people; send them auto-generated url link to the gallery and that is it.
+            <br/>
+            <br/>
+            Happy sharing!
+          </p>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row text-center">
+    <button type="button" class="btn btn-outline-success m-auto" (click)="goToSignUp()">{{ 'hm.menu.signup' | translate }}</button>
+  </div>
+</div>
+
+<br/>
+<br/>
+
+<div class="container" *ngIf="!(homePagePayload$ | async) && !(homePageFailure$ | async)">
+  <div class="row text-center">
+    <span class="m-auto">
+    <i class="fas fa-spinner fa-spin fa-2x"></i>
+      </span>
+  </div>
+</div>
+
+<div class="container">
+  <div class="card-deck" *ngIf="(homePagePayload$ | async) && !(homePageFailure$ | async)">
+
+    <div class="card text-center hm-card" *ngFor="let card of cards; let i = index" [attr.data-index]="i">
+      <div class="card-header hm-card-title">{{ card.title }}</div>
+      <div class="card-body">
+        <br/>
+        <span [innerHtml]="card.icon"></span>
+        <br/>
+        <br/>
+        <span>{{card.val}}</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="alert alert-danger alert-dismissible fade show m-2" role="alert" *ngIf="(homePageFailure$ | async)">
+  <i class="fas fa-exclamation fa-2x"></i><strong>Oh no. </strong> {{ homePageFailure$ }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>

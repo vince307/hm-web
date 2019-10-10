@@ -1,0 +1,77 @@
+
+<mat-tab-group (selectedTabChange)="tabClick($event)" mat-stretch-tabs>
+
+  <mat-tab label="Images" (click)="onClickImages()">
+    <div class="alert alert-danger" role="alert" *ngIf="resultsErrorLoading">
+      Your request can't be processed at the moment, please try again later
+    </div>
+    <div class="alert alert-danger" role="alert" *ngIf="resultsErrorToken">
+      Provided url is invalid
+    </div>
+    <div class="alert alert-warning" role="alert" *ngIf="isResultsEmpty">
+      No records found or gallery is disabled
+    </div>
+    <div #imagesWrapper *ngIf="!resultsErrorToken && !resultsErrorLoading">
+      <ngx-masonry #masonryImages
+                   [options]="myOptions"
+                   class="masonry-wrapper"
+                   (layoutComplete)="doStuff($event)"
+                   (removeComplete)="doOtherStuff($event)">
+        <ngxMasonryItem
+          class="masonry-item"
+          *ngFor="let item of masonryImagesItems; let i = index">
+          <a data-fancybox="gallery" [href]="item.urlBig">
+            <img [src]="item.urlSmall" [width]="item.fFileThumbWidth" [height]="item.fFileThumbHeight" alt="">
+          </a>
+        </ngxMasonryItem>
+      </ngx-masonry>
+      <div class="col text-center p-2" *ngIf="moreImagesBtn">
+        <button (click)="moreImages()" type="button" class="btn btn-outline-secondary">More</button>
+      </div>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Videos" (click)="onClickVideos()">
+    <div class="alert alert-danger" role="alert" *ngIf="resultsErrorLoading">
+      Your request can't be processed at the moment, please try again later
+    </div>
+    <div class="alert alert-danger" role="alert" *ngIf="resultsErrorToken">
+      Provided url is invalid
+    </div>
+    <div class="alert alert-warning" role="alert" *ngIf="isResultsEmpty">
+      No records found or gallery is disabled
+    </div>
+    <div #videosWrapper>
+      <ngx-masonry #masonryVideos
+                   [options]="myOptions"
+                   class="masonry-wrapper"
+                   (layoutComplete)="doStuff($event)"
+                   (removeComplete)="doOtherStuff($event)">
+        <ngxMasonryItem
+          class="masonry-item-video"
+          *ngFor="let item of masonryVideosItems; let i = index">
+          <video id='my-video'
+                 class='video-js'
+                 controls
+                 preload='none'
+                 [width]='item.fFileThumbWidth'
+                 [height]='item.fFileThumbHeight'
+                 poster='{{item.urlSmall}}'
+                 data-setup='{}'>
+            <source src='{{item.src}}' type='video/mp4'>
+            <p class='vjs-no-js'>
+              To view this video please enable JavaScript, and consider upgrading to a web browser that
+              <a href='https://videojs.com/html5-video-support/' target='_blank'>supports HTML5 video</a>
+            </p>
+          </video>
+
+        </ngxMasonryItem>
+      </ngx-masonry>
+      <div class="col text-center p-2" *ngIf="moreVideosBtn">
+        <button (click)="moreVideos()" type="button" class="btn btn-outline-secondary">More</button>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+
+<button (click)="onClickImages()" #refreshBtn class="d-none">refresh</button>

@@ -1,0 +1,40 @@
+
+
+<div class="app-loading text-center" *ngIf="(isAuthenticated$ | async)">
+  <p>
+      We are happy to announce that we are now accepting Stripe<br/>
+      as a secure payment method option for your subscription.
+  </p>
+    <div class="w-50" *ngIf="isPersonal">
+      <button *ngIf="!isProcessingPayment" type="button" class="btn btn-outline-success" (click)="openHandlerForPersonalPlan()">
+        Subscribe for $4.95 per Month
+      </button>
+      <button *ngIf="isProcessingPayment" type="button" class="btn btn-outline-success" disabled>
+        <i class="fas fa-spinner fa-spin fa-2x"></i>
+      </button>
+      <br/>
+      <br/>
+      <img src="./../../../assets/powered_by_stripe.png" alt="powered_by_stripe"/>
+
+    </div>
+    <div class="w-50" *ngIf="isBusiness">
+        <button *ngIf="!isProcessingPayment" type="button" class="btn btn-outline-success" (click)="openHandlerForBusinessPlan()">
+        Subscribe for $8.95 per Month
+      </button>
+      <button *ngIf="isProcessingPayment" type="button" class="btn btn-outline-success" disabled>
+        <i class="fas fa-spinner fa-spin fa-2x"></i>
+      </button>
+      <br/>
+      <br/>
+      <img src="./../../../assets/powered_by_stripe.png" alt="powered_by_stripe"/>
+
+    </div>
+</div>
+
+<div class="app-loading text-center" *ngIf="!(isAuthenticated$ | async)">
+  <div>
+    <i class="fas fa-spinner fa-spin fa-2x"></i>
+  </div>
+</div>
+
+

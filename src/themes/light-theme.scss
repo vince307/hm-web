@@ -1,0 +1,9 @@
+$hm-light-primary: mat-palette($mat-grey, 200, 500, 300);
+$hm-light-accent: mat-palette($mat-brown, 200);
+$hm-light-warn: mat-palette($mat-deep-orange, 200);
+
+$hm-light-theme: mat-light-theme(
+  $hm-light-primary,
+  $hm-light-accent,
+  $hm-light-warn
+);

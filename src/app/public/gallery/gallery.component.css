@@ -1,0 +1,174 @@
+.masonry-item {
+  width: 300px;
+  padding-bottom: 20px;
+}
+
+.masonry-item-video {
+  width: 500px;
+  padding-bottom: 20px;
+}
+
+.masonry-wrapper {
+  padding-top: 20px;
+  margin: auto;
+}
+
+.mat-tab-label {
+  width: 50%;
+}
+
+.mat-drawer {
+  overflow-y: scroll
+}
+
+.video-js {
+  width: 100%;
+  height: 400px;
+}
+
+/**
+buttons
+ */
+.text-white {
+  color: #ffffff;
+}
+.btn-outline-success:hover {
+  color: #28a745;
+  background-color: #ffffff;
+  border-color: #28a745;
+}
+.btn-outline-success {
+  border-top-left-radius: 0;
+  -webkit-border-top-left-radius: 0;
+  -moz-border-radius-topleft: 0;
+  border-top-right-radius: 0;
+  -webkit-border-top-right-radius: 0;
+  -moz-border-radius-topright: 0;
+  border-top: none;
+}
+.btn-success {
+  border-top-left-radius: 0;
+  -webkit-border-top-left-radius: 0;
+  -moz-border-radius-topleft: 0;
+  border-top-right-radius: 0;
+  -webkit-border-top-right-radius: 0;
+  -moz-border-radius-topright: 0;
+  border-top: none;
+}
+
+.btn-outline-danger {
+  border-top-left-radius: 0;
+  -webkit-border-top-left-radius: 0;
+  -moz-border-radius-topleft: 0;
+  border-top-right-radius: 0;
+  -webkit-border-top-right-radius: 0;
+  -moz-border-radius-topright: 0;
+  border-top: none;
+}
+.btn-danger {
+  border-top-left-radius: 0;
+  -webkit-border-top-left-radius: 0;
+  -moz-border-radius-topleft: 0;
+  border-top-right-radius: 0;
+  -webkit-border-top-right-radius: 0;
+  -moz-border-radius-topright: 0;
+  border-top: none;
+}
+.btn.btn-outline-danger:hover .fas.fa-trash.text-danger {
+  color: #ffffff !important;
+}
+/**
+end buttons
+ */
+
+
+.admin-email-items {
+  position: fixed;
+  top: 20%;
+  width: 50px;
+  border: solid 1px rgba(0, 0, 0, 0.12);
+  border-left: none;
+  padding: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topright: 5px;
+  border-top-right-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -moz-border-radius-bottomright: 5px;
+  border-bottom-right-radius: 5px;
+  z-index: 9999;
+  background-color: #ffffff;
+}
+.admin-email-items:hover {
+  cursor: pointer;
+}
+
+.admin-actions-cog {
+  position: fixed;
+  top: 40%;
+  width: 25px;
+  border: solid 1px rgba(0, 0, 0, 0.12);
+  border-left: none;
+  padding: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topright: 5px;
+  border-top-right-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -moz-border-radius-bottomright: 5px;
+  border-bottom-right-radius: 5px;
+  z-index: 9999;
+  background-color: #ffffff;
+}
+.admin-actions-cog:hover {
+  cursor: pointer;
+}
+
+.admin-actions-cog-close {
+  position: fixed;
+  top: 40%;
+  width: 75px;
+  border: solid 1px rgba(0, 0, 0, 0.12);
+  border-left: none;
+  padding: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topright: 5px;
+  border-top-right-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -moz-border-radius-bottomright: 5px;
+  border-bottom-right-radius: 5px;
+  z-index: 9999;
+  background-color: #ffffff;
+}
+
+.options-row {
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding: 0 10px 10px 10px;
+  margin-top: 70px;
+}
+
+.options-title {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.admin-actions-cog:hover {
+  cursor: pointer;
+}
+
+.admin-actions-cog:hover .fa-cog {
+  color: #ffffff
+}
+
+/**
+drawer
+ */
+.example-sidenav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 250px;
+}
+/**
+end drawer
+ */

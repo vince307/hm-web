@@ -1,0 +1,91 @@
+
+<div class="alert alert-danger alert-dismissible fade show m-2" role="alert" *ngIf="(isSignUpFailure$ | async)">
+  <i class="fas fa-exclamation hm-icon-error"></i>&nbsp;<strong>Oh no. </strong> {{ isSignUpFailure$ | async }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="container home" *ngIf="(isSignUpHttpComplete$ | async)">
+  <div class="row">
+    <div class="col text-center">
+      <p>Configuring account...</p>
+    </div>
+  </div>
+</div>
+
+<div class="container home" *ngIf="!(isSignUpHttpComplete$ | async)">
+  <div class="row">
+    <div class="col text-center">
+      <h3>Sign Up</h3>
+      <h6 class="underline">&nbsp;</h6>
+    </div>
+  </div>
+</div>
+<div class="container " *ngIf="!(isSignUpHttpComplete$ | async)">
+  <div class="row  justify-content-center align-items-center">
+    <div class="col-10 col-md-4">
+      <form fxLayout="column"
+        fxLayoutAlign="center center"
+        fxLayoutGap="10px"
+        [formGroup]="signUpForm"
+        (ngSubmit)="onSignUpSubmit()">
+    <mat-form-field>
+      <input
+        [readonly]="(isLoading$ | async)"
+        type="email"
+        matInput
+        placeholder="Email"
+        formControlName="email">
+      <mat-error>Invalid or missing email.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        [readonly]="(isLoading$ | async)"
+        type="password"
+        matInput
+        (focus)="onFocus()"
+        placeholder="Password"
+        formControlName="password">
+
+    </mat-form-field>
+        <div class="alert alert-warning" role="alert" *ngIf="signUpForm.controls['password'].errors && isFocus">
+          <span><b>Note:</b> <br/>
+          1. Password must contain of both upper-case and lower-case letters<br/>
+          2. Must be 8 characters long or more<br/>
+          3. One or more numerical digits <br/>
+          4. At least one of special characters, such as: ~`!@#$%^&*()+=_-[]\|:;”’?/<>,.
+          </span>
+        </div>
+
+        <mat-form-field>
+      <input
+        [readonly]="(isLoading$ | async)"
+        type="password"
+        matInput
+        placeholder="Repeat password"
+        formControlName="rpassword">
+
+      <mat-error>Re-typed password don't match or is missing.</mat-error>
+    </mat-form-field>
+    <div class="w-100 text-center">
+    <br/>
+    <span class="accept-terms">By clicking SignUp, you accept our <b><a href="#/terms">Terms Of Use</a></b></span><br/>
+    <span>Find out about our <b><a href="#/privacy">Privacy</a></b> and <b><a href="#/cookie">Cookies Policy</a></b></span>
+    </div>
+    <br/>
+    <button *ngIf="!(isLoading$ | async) && signUpForm.invalid" type="submit" disabled class="btn btn-outline-success">{{ 'hm.menu.signup' | translate }}</button>
+    <button *ngIf="!(isLoading$ | async) && !signUpForm.invalid" type="submit" class="btn btn-success">{{ 'hm.menu.signup' | translate }}</button>
+    <button *ngIf="(isLoading$ | async) && !signUpForm.invalid" type="submit" class="btn btn-outline-success" disabled>
+      {{ 'hm.menu.signup' | translate }}
+      &nbsp;
+      <i class="fas fa-spinner fa-spin hm-btn-icon"></i>
+    </button>
+    <br/>
+    <br/>
+  </form>
+    </div>
+  </div>
+</div>
+
+

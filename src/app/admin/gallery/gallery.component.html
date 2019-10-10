@@ -1,0 +1,156 @@
+
+<mat-sidenav-container >
+  <mat-sidenav #sidenav
+               mode="side"
+               closed
+               class="example-sidenav">
+    <div class="container" fxLayout="column"
+         fxLayoutAlign="center center"
+         fxLayoutGap="10px">
+      <div class="row options-row">
+        <div >
+          <mat-list>
+            <mat-list-item><span class="options-title">Options</span></mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>
+              <mat-slide-toggle
+              [(ngModel)]="isOptionRemoveItemModel"
+              class="example-margin"
+              labelPosition="before"
+              (change)="optionRemoveItem(isOptionRemove)">
+                Remove Images Mode
+              </mat-slide-toggle>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>
+              <mat-slide-toggle
+              [(ngModel)]="isOptionSelectItemModel"
+              class="example-margin"
+              labelPosition="before"
+              (change)="optionSelectItem(isOptionSelect)">
+                Email Images Mode
+              </mat-slide-toggle>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </div>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-tab-group (selectedTabChange)="tabClick($event)" mat-stretch-tabs>
+      <mat-tab label="Images">
+        <div #imagesWrapper>
+          <ngx-masonry #masonryImages
+
+                       [options]="myOptions"
+                       class="masonry-wrapper"
+                       (layoutComplete)="doStuff($event)"
+                       (removeComplete)="doOtherStuff($event)">
+            <ngxMasonryItem
+              class="masonry-item"
+              *ngFor="let item of masonryImagesItems; let i = index">
+              <a data-fancybox="gallery" [href]="item.urlBig">
+                <img [src]="item.urlSmall" [width]="item.fFileThumbWidth" [height]="item.fFileThumbHeight" alt="">
+              </a>
+
+              <!-- delete btn-->
+              <button *ngIf="isOptionRemove"
+                      (click)="removeItem('image', item.itemId, i)"
+                      type="button"
+                      class="btn w-100 btn-outline-danger">
+                Remove&nbsp;
+                <i class="fas fa-trash text-danger"></i>
+              </button>
+              <!-- select btn-->
+              <button *ngIf="isOptionSelect"
+                      (click)="selectItem('image', item.itemId, i)"
+                      type="button"
+                      [ngClass]="item.select ? 'btn w-100 btn-success' : 'btn w-100 btn-outline-success'">
+                Select&nbsp;
+                <i [ngClass]="item.select ? 'fas fa-check text-white' : 'fas fa-check text-success'"></i>
+              </button>
+
+            </ngxMasonryItem>
+          </ngx-masonry>
+<!--          <div class="col text-center" *ngIf="isLoadingData"><i class="fas fa-spinner fa-2x fa-spin hm-btn-icon"></i></div>-->
+          <div class="col text-center p-2" *ngIf="moreImagesBtn">
+            <button (click)="moreImages()" type="button" class="btn btn-outline-secondary">More</button>
+          </div>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Videos" (click)="onClickVideos()">
+        <div #videosWrapper>
+          <ngx-masonry #masonryVideos
+                       [options]="myOptions"
+                       class="masonry-wrapper"
+                       (layoutComplete)="doStuff($event)"
+                       (removeComplete)="doOtherStuff($event)">
+            <ngxMasonryItem
+              class="masonry-item-video"
+              *ngFor="let item of masonryVideosItems; let i = index">
+              <video id='my-video'
+                     class='video-js'
+                     controls
+                     preload='none'
+                     [width]='item.fFileThumbWidth'
+                     [height]='item.fFileThumbHeight'
+                     poster='{{item.urlSmall}}'
+                     data-setup='{}'>
+                <source src='{{item.src}}' type='video/mp4'>
+                <p class='vjs-no-js'>
+                  To view this video please enable JavaScript, and consider upgrading to a web browser that
+                  <a href='https://videojs.com/html5-video-support/' target='_blank'>supports HTML5 video</a>
+                </p>
+              </video>
+              <!--  delete btn-->
+              <button *ngIf="isOptionRemove"
+                      (click)="removeItem('video', item.itemId, i)"
+                      type="button"
+                      class="btn w-100 btn-outline-danger">
+                Remove&nbsp;
+                <i class="fas fa-trash text-danger"></i>
+              </button>
+
+            </ngxMasonryItem>
+          </ngx-masonry>
+<!--          <div class="col text-center" *ngIf="isLoadingData"><i class="fas fa-spinner fa-2x fa-spin hm-btn-icon"></i></div>-->
+          <div class="col text-center p-2" *ngIf="moreVideosBtn">
+            <button (click)="moreVideos()" type="button" class="btn btn-outline-secondary">More</button>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+
+
+
+    <div [ngClass]="isOptionsOpen === 'close' ? 'admin-actions-cog' : 'admin-actions-cog-close'" (click)="adminActionsModal()">
+      <div *ngIf="isOptionsOpen === 'close'">
+      <div class="text-center">O</div>
+      <div class="text-center">p</div>
+      <div class="text-center">t</div>
+      <div class="text-center">i</div>
+      <div class="text-center">o</div>
+      <div class="text-center">n</div>
+      <div class="text-center">s</div>
+      </div>
+      <div *ngIf="isOptionsOpen === 'open'">
+        <div class="text-center">Close&nbsp;<i class="fas fa-window-close"></i></div>
+      </div>
+    </div>
+
+    <div *ngIf="isOptionSelect" class="admin-email-items" (click)="sendEmailWithItems()">
+      <div *ngIf="!sendingEmailWithItems">
+        <div class="text-center"><i class="fas fa-2x fa-paper-plane"></i></div>
+      </div>
+      <div *ngIf="sendingEmailWithItems">
+        <div class="text-center"><i class="fas fa-spinner fa-2x fa-spin"></i></div>
+      </div>
+    </div>
+
+    <button (click)="onClickImages()" #refreshBtn class="d-none">refresh</button>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

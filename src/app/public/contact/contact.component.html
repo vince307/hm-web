@@ -1,0 +1,93 @@
+
+<div class="alert alert-success alert-dismissible fade show m-2" role="alert" *ngIf="isContactSendSuccess">
+  <i class="fas fa-check hm-btn-icon"></i>&nbsp;<strong>Splendid!</strong> Your message has been sent.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlert()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+
+<div class="alert alert-danger alert-dismissible fade show m-2" role="alert" *ngIf="isContactSendFailure">
+  <i class="fas fa-exclamation hm-icon-error"></i>&nbsp;<strong>Oh no. </strong> {{ isContactSendFailure }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlert()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="container home">
+  <div class="row">
+    <div class="col text-center">
+      <h3>Contact</h3>
+      <h6 class="underline">&nbsp;</h6>
+      <section>
+        <form
+          fxLayout="column"
+          fxLayoutAlign="center center"
+          fxLayoutGap="10px"
+          [formGroup]="contactForm"
+          (ngSubmit)="onSubmitContact()">
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Name"
+              formControlName="name">
+            <mat-error
+              *ngIf="contactForm.controls['name'].errors && !this.isContactSendSuccess">
+              Missing name.
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Email"
+              formControlName="email">
+            <mat-error
+              *ngIf="contactForm.controls['email'].errors && !this.isContactSendSuccess">
+              Invalid or missing email.
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <textarea
+              matInput
+              placeholder="Message ..."
+              formControlName="message">
+            </textarea>
+            <mat-error
+              *ngIf="contactForm.controls['message'].errors && !this.isContactSendSuccess">
+              You must write something to send message.
+            </mat-error>
+          </mat-form-field>
+          <button
+            type="submit"
+            [disabled]="true"
+            *ngIf="contactForm.invalid && !isContactSendInProcess"
+            class="btn btn-outline-success">
+            {{ 'hm.menu.contact-send' | translate }}
+            <i class="fas fa-paper-plane hm-btn-icon"></i>
+          </button>
+          <button
+            type="submit"
+            *ngIf="!contactForm.invalid && !isContactSendInProcess"
+            class="btn btn-success">
+            {{ 'hm.menu.contact-send' | translate }}
+            <i class="fas fa-paper-plane hm-btn-icon hm-btn-icon-fill"></i>
+          </button>
+        <button
+          *ngIf="isContactSendInProcess"
+            type="submit"
+            [disabled]="true"
+            class="btn btn-outline-success">
+            {{ 'hm.menu.contact-send' | translate }}
+            <i class="fas fa-spinner fa-spin hm-btn-icon"></i>
+          </button>
+        </form>
+      </section>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+

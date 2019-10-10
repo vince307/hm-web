@@ -1,0 +1,29 @@
+
+.hm-card-pointer:hover {
+  cursor: pointer;
+}
+
+.hm-card {
+  min-width: 230px;
+  margin-bottom: 20px;
+}
+
+.btn.btn-outline-dark:hover .fas {
+  color: #ffffff !important;
+}
+
+.btn.btn-outline-danger:hover .fas {
+  color: #ffffff !important;
+}
+
+.btn.btn-outline-danger .fas {
+  color: #dc3545 !important;
+}
+
+.btn.btn-outline-success .fas {
+  color: #28a745 !important;
+}
+
+.btn.btn-outline-success:hover .fas {
+  color: #ffffff !important;
+}

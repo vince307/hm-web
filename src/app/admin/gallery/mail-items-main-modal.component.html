@@ -1,0 +1,51 @@
+
+
+<h1 mat-dialog-title fxLayoutAlign="center center">Send Images to:</h1>
+<div mat-dialog-content style="height: 75%; overflow: auto">
+
+  <div fxLayout="column"
+       fxLayoutAlign="center center"
+       fxLayoutGap="10px">
+    <div *ngFor="let item of emailAddressList, let i = index">
+      <mat-form-field>
+        <input
+          [readonly]="false"
+          type="email"
+          matInput
+          (keyup)="onKey($event, i)"
+          [(ngModel)]="item.value"
+          [ngClass]="!item.valid ? 'hint-error' : ''"
+          placeholder="Email">
+        <mat-hint class="hint-error" *ngIf="!item.valid">Invalid or missing email.</mat-hint>
+      </mat-form-field>
+
+      <button type="button"
+              (click)="addInput(i, item, item.action)"
+              [ngClass]="item.action === 'add' ? 'btn hm-btn btn-outline-success m-2' : 'btn hm-btn btn-outline-danger m-2'"
+              >
+            <i [ngClass]="item.btnIcon"></i>
+      </button>
+      <button type="button"
+              *ngIf="(i === (emailAddressList.length - 1)) && (i !== 0)"
+              (click)="addInput(i, item, 'remove')"
+              class="btn hm-btn btn-outline-danger">
+        <i [ngClass]="removeBtnObject.btnIcon"></i>
+      </button>
+    </div>
+    <mat-form-field class="w-75">
+        <textarea
+          [readonly]="false"
+          type="text"
+          matInput
+          [(ngModel)]="emailMessage"
+          [ngClass]="!emailMessage ? 'hint-error' : ''"
+          placeholder="Message">
+        </textarea>
+      <mat-hint class="hint-error" *ngIf="!emailMessage">Field can't be empty.</mat-hint>
+    </mat-form-field>
+  </div>
+</div>
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="center center" style="justify-content: flex-end;" class="w-100">
+  <button mat-button class="w-auto" (click)="onNoClick()">Cancel</button>
+  <button mat-button class="w-auto" (click)="onClickSend()">Send</button>
+</div>

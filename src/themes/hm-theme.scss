@@ -1,0 +1,38 @@
+$mat-green-hm: (
+  50: #e8f5e9,
+  100: #c8e6c9,
+  200: #a5d6a7,
+  300: #81c784,
+  400: #66bb6a,
+  500: #4caf50,
+  600: #43a047,
+  700: #388e3c,
+  800: #2e7d32,
+  900: #1b5e20,
+  A100: #b9f6ca,
+  A200: #69f0ae,
+  A400: #00e676,
+  A700: #00c853,
+  contrast: (
+    50: #333,
+    100: #333,
+    200: #333,
+    300: #333,
+    400: #333,
+    500: #333,
+    600: #333,
+    700: #333,
+    800: #333,
+    900: #333,
+    A100: #333,
+    A200: #333,
+    A400: #333,
+    A700: #333
+  )
+);
+
+$hm-primary: mat-palette($mat-green-hm, 800, 300, 900);
+$hm-accent: mat-palette($mat-green-hm);
+$hm-warn: mat-palette($mat-red, 600);
+
+$hm-theme: mat-light-theme($hm-primary, $hm-accent, $hm-warn);
